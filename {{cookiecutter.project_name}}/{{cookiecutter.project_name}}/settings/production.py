@@ -3,7 +3,7 @@
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-import simple
+import {{cookiecutter.project_name|lower}}
 
 from .base import *
 
@@ -30,7 +30,7 @@ SESSION_COOKIE_SECURE = True
 
 sentry_sdk.init(
     dsn=config("SENTRY_DSN", default=""),
-    environment=SIMPLE_ENVIRONMENT,
-    release="simple@%s" % simple.__version__,
+    environment={{cookiecutter.project_name|upper}}_ENVIRONMENT,
+    release="{{cookiecutter.project_name|lower}}@%s" % {{cookiecutter.project_name|lower}}.__version__,
     integrations=[DjangoIntegration()],
 )

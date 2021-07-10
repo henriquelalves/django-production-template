@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # CORE SETTINGS
 # ==============================================================================
 
-SECRET_KEY = config("SECRET_KEY", default="django-insecure$simple.settings.local")
+SECRET_KEY = config("SECRET_KEY", default="django-insecure${{cookiecutter.project_name|lower}}.settings.local")
 
 DEBUG = config("DEBUG", default=True, cast=bool)
 
@@ -23,17 +23,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "simple.apps.accounts",
-    "simple.apps.core",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ROOT_URLCONF = "simple.urls"
+ROOT_URLCONF = "{{cookiecutter.project_name|lower}}.urls"
 
 INTERNAL_IPS = ["127.0.0.1"]
 
-WSGI_APPLICATION = "simple.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.project_name|lower}}.wsgi.application"
 
 
 # ==============================================================================
@@ -78,7 +76,7 @@ TEMPLATES = [
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL", default="postgres://simple:simple@localhost:5432/simple"),
+        default=config("DATABASE_URL", default="postgres://{{cookiecutter.project_name|lower}}:{{cookiecutter.project_name|lower}}@localhost:5432/{{cookiecutter.project_name|lower}}"),
         conn_max_age=600,
     )
 }
@@ -155,4 +153,4 @@ MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 # FIRST-PARTY SETTINGS
 # ==============================================================================
 
-SIMPLE_ENVIRONMENT = config("SIMPLE_ENVIRONMENT", default="local")
+{{cookiecutter.project_name|upper}}_ENVIRONMENT = config("{{cookiecutter.project_name|upper}}_ENVIRONMENT", default="local")
