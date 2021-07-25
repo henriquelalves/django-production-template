@@ -12,11 +12,19 @@ To use it, first install the [cookiecutter](https://github.com/cookiecutter/cook
 
 It'll properly setup the project with the name of your choosing.
 
+To run locally, you'll have to install all Python packages:
+
+`pip install -r djangoapp/requirements.txt`
+
+And do the initial migrations:
+
+`./manage.py migrate`
+
 ## Running Locally
 
 `./manage.py runserver`
 
-The project is configured to run locally with Django's SQLite. You might need to run `./manage.py collectstatic` before, and every time there is new static content on your Django application.
+The project is configured to run locally with Django's SQLite.
 
 ## Running Production with Docker-Compose
 
