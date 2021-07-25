@@ -10,28 +10,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # CORE SETTINGS
 # ==============================================================================
 
-SECRET_KEY = config("SECRET_KEY", default="django-insecure${{cookiecutter.project_name|lower}}.settings.local")
+SECRET_KEY = config("SECRET_KEY", default="django-insecure${{cookiecutter.project_name}}.settings.local")
 
 DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv())
 
 INSTALLED_APPS = [
+    # CORE
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # APPS
+    "{{cookiecutter.project_name}}.apps.samplepage",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ROOT_URLCONF = "{{cookiecutter.project_name|lower}}.urls"
+ROOT_URLCONF = "{{cookiecutter.project_name}}.urls"
 
 INTERNAL_IPS = ["127.0.0.1"]
 
-WSGI_APPLICATION = "{{cookiecutter.project_name|lower}}.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.project_name}}.wsgi.application"
+
+# USE_X_FORWARDED_HOST = True
 
 
 # ==============================================================================
@@ -56,7 +61,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -75,12 +80,11 @@ TEMPLATES = [
 # ==============================================================================
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=config("DATABASE_URL", default="postgres://{{cookiecutter.project_name|lower}}:{{cookiecutter.project_name|lower}}@localhost:5432/{{cookiecutter.project_name|lower}}"),
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
 }
-
 
 # ==============================================================================
 # AUTHENTICATION AND AUTHORIZATION SETTINGS
@@ -153,4 +157,4 @@ MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 # FIRST-PARTY SETTINGS
 # ==============================================================================
 
-{{cookiecutter.project_name|upper}}_ENVIRONMENT = config("{{cookiecutter.project_name|upper}}_ENVIRONMENT", default="local")
+RUN_ENVIRONMENT = config("RUN_ENVIRONMENT", default="local")
