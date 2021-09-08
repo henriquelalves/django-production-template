@@ -10,8 +10,9 @@ services:
     volumes:
       - ./djangoapp/{{cookiecutter.project_name}}:/djangoapp/{{cookiecutter.project_name}}
       - ./config/nginx:/etc/nginx/conf.d
-      - ./{{cookiecutter.project_name}}/static:/static
       - ./certs:/etc/ssl/certs
+      - ./static:/static
+      - ./media:/media
     depends_on:
       - app
   app:
@@ -22,7 +23,8 @@ services:
       - db
     volumes:
       - ./djangoapp/{{cookiecutter.project_name}}:/djangoapp/{{cookiecutter.project_name}}
-      - ./{{cookiecutter.project_name}}/static:/static
+      - ./static:/static
+      - ./media:/media
     expose:
       - "8000"
     env_file:
