@@ -18,7 +18,7 @@ services:
   app:
     build: .
     container_name: DJANGO
-    command: bash -c "./wait-for-it.sh db:5432 && python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic && gunicorn {{cookiecutter.project_name}}.wsgi -b 0.0.0.0:8000"
+    command: bash -c "./wait-for-it.sh db:5432 && python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn {{cookiecutter.project_name}}.wsgi -b 0.0.0.0:8000"
     depends_on:
       - db
     volumes:
